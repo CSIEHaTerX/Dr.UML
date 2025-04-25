@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../types';
+import './SidePalette.css';
 
 const PaletteItem: React.FC = () => {
   const [{ isDragging }, drag] = useDrag({
@@ -22,11 +23,23 @@ const PaletteItem: React.FC = () => {
   );
 };
 
-const SidePalette: React.FC = () => {
+interface SidePaletteProps {
+  isOpen: boolean;
+  toggleOpen: () => void;
+}
+
+const SidePalette: React.FC<SidePaletteProps> = ({ isOpen, toggleOpen }) => {
   return (
-    <div className="side-palette">
-      <h3 style={{ fontSize: '14px', margin: '10px 0' }}>Shapes</h3>
-      <PaletteItem />
+    <div className={`side-palette-wrapper ${isOpen ? 'open' : 'collapsed'}`}>
+      <div className="toggle-button" onClick={toggleOpen}>
+        {isOpen ? '⮜' : '⮞'}
+      </div>
+      {isOpen && (
+        <div className="side-palette-content">
+          <h3 className="palette-title">Shapes</h3>
+          <PaletteItem />
+        </div>
+      )}
     </div>
   );
 };
