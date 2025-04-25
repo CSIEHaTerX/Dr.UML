@@ -42,7 +42,7 @@ const Canvas: React.FC = () => {
   return (
     <div ref={drop} className="canvas-container">
       <Stage
-        width={window.innerWidth - 200}
+        width={window.innerWidth - 80} /* Adjusted for narrower sidebar */
         height={window.innerHeight}
         ref={stageRef}
       >

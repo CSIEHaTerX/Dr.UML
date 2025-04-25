@@ -17,7 +17,7 @@ const PaletteItem: React.FC = () => {
       className="palette-item"
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
-      Rectangle
+      Rect
     </div>
   );
 };
@@ -25,7 +25,7 @@ const PaletteItem: React.FC = () => {
 const SidePalette: React.FC = () => {
   return (
     <div className="side-palette">
-      <h3>Shapes</h3>
+      <h3 style={{ fontSize: '14px', margin: '10px 0' }}>Shapes</h3>
       <PaletteItem />
     </div>
   );
