@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import Konva from 'konva';
 import { Stage, Layer, Rect } from 'react-konva';
 import { useDrop } from 'react-dnd';
@@ -20,16 +20,14 @@ const Canvas: React.FC = () => {
   const [, drop] = useDrop({
     accept: ItemTypes.RECT,
     drop: (item, monitor) => {
-      const stage = stageRef.current;
-      if (!stage) return;
+      const clientOffset = monitor.getClientOffset();
+      if (!clientOffset) return;
 
-      const pointerPos = stage.getPointerPosition();
-      if (!pointerPos) return;
-
+      // Adjust for SidePalette width (80px) to get Canvas-relative coordinates
       const newRect: RectShape = {
         id: `rect-${Date.now()}`,
-        x: pointerPos.x,
-        y: pointerPos.y,
+        x: clientOffset.x - 80, // Subtract SidePalette width
+        y: clientOffset.y,
         width: 100,
         height: 50,
         fill: '#ff0000',
@@ -42,7 +40,7 @@ const Canvas: React.FC = () => {
   return (
     <div ref={drop} className="canvas-container">
       <Stage
-        width={window.innerWidth - 80} /* Adjusted for narrower sidebar */
+        width={window.innerWidth - 80}
         height={window.innerHeight}
         ref={stageRef}
       >
