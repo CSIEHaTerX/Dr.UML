@@ -1,28 +1,32 @@
-// SidePalette.tsx
-import React from "react";
-import { useDrag } from "react-dnd";
+import React from 'react';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from '../types';
 
-const SidePalette = () => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "GADGET",
-    item: { type: "rectangle" }, // 可以加更多元件類型
+const PaletteItem: React.FC = () => {
+  const [{ isDragging }, drag] = useDrag({
+    type: ItemTypes.RECT,
+    item: { type: ItemTypes.RECT },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-  }));
+  });
 
   return (
-    <div ref={drag} style={{ padding: 10, borderRight: "1px solid gray" }}>
-      <div
-        style={{
-          opacity: isDragging ? 0.5 : 1,
-          padding: 8,
-          background: "lightblue",
-          cursor: "grab",
-        }}
-      >
-        拖我：矩形
-      </div>
+    <div
+      ref={drag}
+      className="palette-item"
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      Rectangle
+    </div>
+  );
+};
+
+const SidePalette: React.FC = () => {
+  return (
+    <div className="side-palette">
+      <h3>Shapes</h3>
+      <PaletteItem />
     </div>
   );
 };

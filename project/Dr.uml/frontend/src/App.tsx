@@ -1,19 +1,19 @@
-// App.tsx
-import React from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import SidePalette from "./components/SidePalette";
-import Canvas from "./components/Canvas";
+import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import Canvas from './components/Canvas';
+import SidePalette from './components/SidePalette';
+import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div style={{ display: "flex" }}>
+      <div className="app-container">
         <SidePalette />
         <Canvas />
       </div>
     </DndProvider>
   );
-}
+};
 
 export default App;

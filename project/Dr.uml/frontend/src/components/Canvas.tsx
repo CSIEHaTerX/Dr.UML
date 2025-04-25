@@ -1,39 +1,76 @@
-// Canvas.tsx
-import React, { useState } from "react";
-import { Stage, Layer, Rect } from "react-konva";  // 來自 konva 進行畫布渲染
-import { useDrag } from "react-dnd";  // 來自 react-dnd 進行拖曳
+import React, { useRef, useEffect } from 'react';
+import Konva from 'konva';
+import { Stage, Layer, Rect } from 'react-konva';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../types';
 
-const Canvas = () => {
-  const [shapes, setShapes] = useState([
-    { id: "1", x: 50, y: 50, width: 100, height: 100, color: "red" },
-    { id: "2", x: 200, y: 150, width: 100, height: 100, color: "green" },
-  ]);
+interface RectShape {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: string;
+}
 
-  const moveShape = (id: string, newX: number, newY: number) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape =>
-        shape.id === id ? { ...shape, x: newX, y: newY } : shape
-      )
-    );
-  };
+const Canvas: React.FC = () => {
+  const [shapes, setShapes] = React.useState<RectShape[]>([]);
+  const stageRef = useRef<Konva.Stage>(null);
+
+  const [, drop] = useDrop({
+    accept: ItemTypes.RECT,
+    drop: (item, monitor) => {
+      const stage = stageRef.current;
+      if (!stage) return;
+
+      const pointerPos = stage.getPointerPosition();
+      if (!pointerPos) return;
+
+      const newRect: RectShape = {
+        id: `rect-${Date.now()}`,
+        x: pointerPos.x,
+        y: pointerPos.y,
+        width: 100,
+        height: 50,
+        fill: '#ff0000',
+      };
+
+      setShapes((prev) => [...prev, newRect]);
+    },
+  });
 
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
-      <Layer>
-        {shapes.map(shape => (
-          <Rect
-            key={shape.id}
-            x={shape.x}
-            y={shape.y}
-            width={shape.width}
-            height={shape.height}
-            fill={shape.color}
-            draggable
-            onDragEnd={(e) => moveShape(shape.id, e.target.x(), e.target.y())}
-          />
-        ))}
-      </Layer>
-    </Stage>
+    <div ref={drop} className="canvas-container">
+      <Stage
+        width={window.innerWidth - 200}
+        height={window.innerHeight}
+        ref={stageRef}
+      >
+        <Layer>
+          {shapes.map((shape) => (
+            <Rect
+              key={shape.id}
+              x={shape.x}
+              y={shape.y}
+              width={shape.width}
+              height={shape.height}
+              fill={shape.fill}
+              draggable
+              onDragEnd={(e) => {
+                const node = e.target;
+                setShapes((prev) =>
+                  prev.map((s) =>
+                    s.id === shape.id
+                      ? { ...s, x: node.x(), y: node.y() }
+                      : s
+                  )
+                );
+              }}
+            />
+          ))}
+        </Layer>
+      </Stage>
+    </div>
   );
 };
 
