@@ -1,73 +1,84 @@
-import React, { useRef } from 'react';
-import Konva from 'konva';
-import { Stage, Layer, Rect } from 'react-konva';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../types';
+import { dia, shapes } from '@joint/core';
+import ShapeEditor from './ShapeEditor';
 
-interface RectShape {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  fill: string;
-}
+const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const paperRef = useRef<dia.Paper | null>(null);
+  const [selectedShape, setSelectedShape] = useState<dia.Element | null>(null);
 
-const Canvas: React.FC = () => {
-  const [shapes, setShapes] = React.useState<RectShape[]>([]);
-  const stageRef = useRef<Konva.Stage>(null);
+  useEffect(() => {
+    if (canvasRef.current && !paperRef.current) {
+      paperRef.current = new dia.Paper({
+        el: canvasRef.current,
+        model: graph,
+        width: canvasRef.current.offsetWidth,
+        height: canvasRef.current.offsetHeight,
+        background: { color: '#F5F5F5' },
+        cellViewNamespace: shapes,
+      });
+
+      paperRef.current.on('element:pointerdown', (elementView) => {
+        setSelectedShape(elementView.model); // Set the clicked shape as selected
+      });
+    }
+  }, [graph]);
 
   const [, drop] = useDrop({
-    accept: ItemTypes.RECT,
-    drop: (item, monitor) => {
-      const clientOffset = monitor.getClientOffset();
-      if (!clientOffset) return;
+    accept: ItemTypes.SHAPE,
+    drop: (item: { type: string }, monitor) => {
+      const offset = monitor.getClientOffset();
+      if (offset && paperRef.current) {
+        const { x, y } = offset;
+        const localPoint = paperRef.current.clientToLocalPoint({ x, y });
 
-      // Adjust for SidePalette width (80px) to get Canvas-relative coordinates
-      const newRect: RectShape = {
-        id: `rect-${Date.now()}`,
-        x: clientOffset.x - 80, // Subtract SidePalette width
-        y: clientOffset.y,
-        width: 100,
-        height: 50,
-        fill: '#ff0000',
-      };
+        let element;
+        if (item.type === 'Rectangle') {
+          element = new shapes.standard.Rectangle();
+          element.attr({
+            body: { fill: '#3498db' },
+          });
+        } else if (item.type === 'Circle') {
+          element = new shapes.standard.Circle();
+          element.attr({
+            body: { fill: '#e74c3c' },
+          });
+        }
 
-      setShapes((prev) => [...prev, newRect]);
+        if (element) {
+          element.position(localPoint.x, localPoint.y);
+          element.resize(100, 40);
+          element.addTo(graph);
+        }
+      }
     },
   });
 
   return (
-    <div ref={drop} className="canvas-container">
-      <Stage
-        width={window.innerWidth - 80}
-        height={window.innerHeight}
-        ref={stageRef}
-      >
-        <Layer>
-          {shapes.map((shape) => (
-            <Rect
-              key={shape.id}
-              x={shape.x}
-              y={shape.y}
-              width={shape.width}
-              height={shape.height}
-              fill={shape.fill}
-              draggable
-              onDragEnd={(e) => {
-                const node = e.target;
-                setShapes((prev) =>
-                  prev.map((s) =>
-                    s.id === shape.id
-                      ? { ...s, x: node.x(), y: node.y() }
-                      : s
-                  )
-                );
-              }}
-            />
-          ))}
-        </Layer>
-      </Stage>
+    <div
+      ref={(node) => {
+        drop(node);
+        canvasRef.current = node;
+      }}
+      id="paper"
+      style={{
+        flex: 1,
+        height: '100vh',
+        backgroundColor: '#ffffff', // White background for better contrast
+        position: 'relative',
+        zIndex: 1,
+        overflow: 'hidden',
+        border: '1px solid #ddd', // Add a subtle border
+      }}
+    >
+      {selectedShape && (
+        <ShapeEditor
+          shape={selectedShape}
+          onClose={() => setSelectedShape(null)} // Close the editor
+        />
+      )}
     </div>
   );
 };
