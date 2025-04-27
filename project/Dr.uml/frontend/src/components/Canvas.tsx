@@ -3,6 +3,7 @@ import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../types';
 import { dia, shapes } from '@joint/core';
 import ShapeEditor from './ShapeEditor';
+import SessionManager from '../utils/SessionManager';
 
 const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -10,6 +11,12 @@ const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
   const [selectedShape, setSelectedShape] = useState<dia.Element | null>(null);
 
   useEffect(() => {
+    const sessionManager = SessionManager.getInstance();
+    const savedGraph = sessionManager.getItem<dia.Graph.Properties>('graph');
+    if (savedGraph) {
+      graph.fromJSON(savedGraph); // Restore graph state from session
+    }
+
     if (canvasRef.current && !paperRef.current) {
       paperRef.current = new dia.Paper({
         el: canvasRef.current,
@@ -21,9 +28,13 @@ const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
       });
 
       paperRef.current.on('element:pointerdown', (elementView) => {
-        setSelectedShape(elementView.model); // Set the clicked shape as selected
+        setSelectedShape(elementView.model);
       });
     }
+
+    return () => {
+      sessionManager.setItem('graph', graph.toJSON()); // Save graph state on unmount
+    };
   }, [graph]);
 
   const [, drop] = useDrop({
@@ -66,17 +77,17 @@ const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
       style={{
         flex: 1,
         height: '100vh',
-        backgroundColor: '#ffffff', // White background for better contrast
+        backgroundColor: '#ffffff',
         position: 'relative',
         zIndex: 1,
         overflow: 'hidden',
-        border: '1px solid #ddd', // Add a subtle border
+        border: '1px solid #ddd',
       }}
     >
       {selectedShape && (
         <ShapeEditor
           shape={selectedShape}
-          onClose={() => setSelectedShape(null)} // Close the editor
+          onClose={() => setSelectedShape(null)}
         />
       )}
     </div>

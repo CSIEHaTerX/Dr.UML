@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
-import { dia, shapes } from '@joint/core';
 import SidePalette from './components/SidePalette';
-import Canvas from './components/Canvas';
-
-const namespace = shapes;
-
-const graph = new dia.Graph({}, { cellNamespace: namespace });
+import TopMenu from './components/TopMenu'; // Import TopMenu
+import ChatRoom from './components/ChatRoom'; // Import ChatRoom
+import DiagramTabs from './components/DiagramTabs'; // Import DiagramTabs
 
 const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="app-container" style={{ display: 'flex' }}>
-        <SidePalette graph={graph} />
-        <Canvas graph={graph} />
+      <div className="app-container" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        <TopMenu /> {/* Add TopMenu */}
+        <div style={{ display: 'flex', flex: 1 }}>
+          <SidePalette graph={null} />
+          <DiagramTabs /> {/* Replace Canvas with DiagramTabs */}
+          <div style={{ width: '300px', marginLeft: '10px' }}> {/* Add ChatRoom */}
+            <ChatRoom />
+          </div>
+        </div>
       </div>
     </DndProvider>
   );
