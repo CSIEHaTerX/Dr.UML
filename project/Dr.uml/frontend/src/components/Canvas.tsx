@@ -60,7 +60,7 @@ const Canvas: React.FC<{ graph: dia.Graph }> = ({ graph }) => {
     <div
       ref={(node) => {
         drop(node);
-        canvasRef.current = node;
+        (canvasRef.current as HTMLDivElement | null) = node;
       }}
       id="paper"
       style={{
