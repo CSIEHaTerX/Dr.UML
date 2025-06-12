@@ -97,17 +97,27 @@
         \end{itemize}
     \end{itemize}
 
-%    \subsection{hw7}
-%    \begin{itemize}
-%        \item Update Figure
-%            \begin{itemize}
-%                \item Sequence diagram
-%                \begin{itemize}
-%                    \item Remove UI from all sequence diagrams.
-%                    \item Add UMLProject to UpdateProperty by controller pattern.
-%                \end{itemize}
-%            \end{itemize}
-%    \end{itemize}
+    \subsection{HW7}
+    \begin{itemize}
+        \item Update Figure
+        \begin{itemize}
+            \item Remove up-down arrows from the Domain model diagram.
+            \item Sequence diagram
+            \begin{itemize}
+                \item Remove UI from all sequence diagrams.
+                \item Add UMLProject to UpdateProperty by controller pattern.
+            \end{itemize}
+            \item Revise Design Class Diagram based on midterm feedback
+        \end{itemize}
+        \item Use case
+        \begin{itemize}
+            \item Add missing \("\)Technology and Data Variations List\("\) and \("\)Special Requirements\("\) sections for each use case.
+        \end{itemize}
+        \item Add missing classes to identified classes
+        \item Add \("\)Comparison with design and implementation class\("\) table
+        \item Add \("\)Summary of implementation class/method changed\("\) table
+        \item Update lines of code
+    \end{itemize}
 
 %% START HW1
 
@@ -169,7 +179,7 @@
         \item \textbf{Success Guarantee}: UML is edited according to the User’s specifications.
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
-            \item User \hl{selects} Gadgets from Toolbox.
+            \item User selects Gadgets from Toolbox.
             \item User edits the Gadgets.
             \item User establishes connections between Gadgets via Associations.
             \item User modifies the Associations as needed.
@@ -180,19 +190,19 @@
             UML will revert to the last successfully saved state.
             \item *b When editing text, User may design their text as desired(See UC09)
             \item *c User may select Gadgets within the canvas.
-            \item *d When User drags Gadget with multiple Associations, System will automatically \hl{update} them.
+            \item *d When User drags Gadget with multiple Associations, System will automatically update them.
             \item *e User can determine the layering order when Gadgets overlap.
             \item *f User may copy and paste Components.
             \begin{enumerate}
                 \item Copying or pasting Associations will also include connected Gadgets.
             \end{enumerate}
             \item *g User may undo or redo actions.
-            \item \hl{*h User can skip any step from 1 to 4}
+            \item *h User can skip any step from 1 to 4
             \item 1.a Edit fails if Gadget is dragged to an invalid location.
             \item 1.b User can also import an available Submodule in the current Project.
             \item 2.a Different types of Gadgets will have distinct Fields available for editing.
             \item 2.b Edited Gadgets will automatically scale to fit the changes.
-            \item 2.c User can modify the color of a Gadget. The color will apply to \hl{Gadget's background.}
+            \item 2.c User can modify the color of a Gadget. The color will apply to Gadget's background.
             \item 2.d User can move the Gadget as long as the destination is valid. The associations will be updated automatically.
             \item 3.a Deleting a Gadget will also remove the associated connections.
             \item 3.b Self-Associations are allowed.
@@ -202,7 +212,14 @@
         \end{itemize}
         \item \textbf{Special Requirements}:
         \begin{itemize}
-            \item When multiple users are editing, no unintended behavior should occur.
+            \item When multiple users are editing, Nounintended behavior should occur.
+        \end{itemize}
+        \item \tesxtbf{Technology and Data Variations List}:
+        \begin{itemize}
+            \item 1.a Based on the diagram type, the available Gadgets will vary (e.g.,\ class Gadgets for a class diagram).
+            \item 2.a User sets and modifies Attributes of a Gadget by mouse or keyboard input.
+            \item 3.a Based on the diagram and related-Gadget type, the available Association will vary from valid UML components (e.g.,\ Composition for an Association linking two class Gadgets).
+            \item 4.a User sets and modifies Attributes of an Association by mouse or keyboard input.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Often
         \item \textbf{Open Issues}: None specified
@@ -237,12 +254,20 @@
         \item \textbf{Extensions}:
         \begin{itemize}
             \item *a In both Project and Diagram, the time of last edit is recorded and can be viewed by User.
-            \item *b If System fails manage (load, save, and export) Project or Diagram, User will be prompted to either retry the operation or abort.
+            \item *b If System fails to manage (load, save, and export) Project or Diagram, User will be prompted to either retry the operation or abort.
             \item 1.a User may choose to create a new Project.
             \item 1.b User can modify the name of the Project.
             \item 2.a User may choose to create a new Diagram.
             \item 3.a User can modify the type, background color, filename of the Diagram.
             \item 4.b When exporting Diagram, User may select one of the supported UML formats (for future verification purposes).
+        \end{itemize}
+        \item Special Requirements
+        \begin{itemize}
+            \item The system should allow users to manage diagrams efficiently, supporting batch operations such as removing or saving multiple diagrams at once.
+        \end{itemize}
+        \item \texbf {Technology and Data Variations List}
+        \begin{itemize}
+            \item 4.a The saved file is in a json5-based format.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Occasionally
         \item \textbf{Open Issues}: None specified
@@ -266,11 +291,20 @@
         \item \textbf{Success Guarantee}: Exported image is saved to Filesystem.
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
-            \item User starts the exporting current UML.
+            \item User starts exporting current diagram.
             \item User selects a supported image format and specifies a filename.
             \item System saves the exported image to Filesystem.
         \end{enumerate}
         \item \textbf{Extensions}:
+        \begin{itemize}
+            \item 3.a If Filesystem fails to save the exported image, User will be prompted to either retry the operation or abort.
+        \end{itemize}
+        \item Special Requirements
+        \begin{itemize}
+            \item System is expected to generate the exported image within 5 seconds.
+            \item System should allow users to export diagrams efficiently, supporting multiple diagram exports.
+        \end{itemize}
+        \item \texbf {Technology and Data Variations List}
         \begin{itemize}
             \item 2.a Supported formats:
             \begin{itemize}
@@ -279,7 +313,6 @@
                 \item SVG
                 \item WebP
             \end{itemize}
-            \item 3.a If Filesystem fails to save the exported image, User will be prompted to either retry the operation or abort.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Occasionally
         \item \textbf{Open Issues}: None specified
@@ -314,8 +347,8 @@
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
             \item User imports a Submodule file from Filesystem.
-            \item From the Project menu, User select a outdated Submodule and remove it.
-            \item After drawing a number of Component, User selects and export them as a Submodule.
+            \item From the Project menu, User selects an outdated Submodule and removes it.
+            \item After drawing a number of Components, User selects and exports them as a Submodule.
             \item The Submodule file is saved to Filesystem.
         \end{enumerate}
         \item \textbf{Extensions}:
@@ -324,6 +357,15 @@
             \item 3.a If nothing is selected, User cannot export it as Submodule.
             \item 3.b Optionally, the saved Submodule may have empty Fields.
             \item 4.a If Filesystem fails to save Submodule file, User will be prompted to either retry the operation or abort.
+        \end{itemize}
+        \item Special Requirements
+        \begin{itemize}
+            \item System is expected to export a Submodule within 5 seconds.
+            \item System can distinguish a saved Submodule file from a Diagram one (See UC02).
+        \end{itemize}
+        \item \texbf {Technology and Data Variations List}
+        \begin{itemize}
+            \item 4.a The saved file is in a json5-based format.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Sometimes
         \item \textbf{Open Issues}: None specified
@@ -392,7 +434,7 @@
             \item A stable connection exists between Host and Client.
             \item Host opened a UML project.
         \end{itemize}
-        \item \textbf{Success Guarantee}: Connection is established and maintained, UML is synced, and no conflicts occur.
+        \item \textbf{Success Guarantee}: Connection is established and maintained, UML is synced, and Noconflicts occur.
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
             \item Host starts a Session.
@@ -413,6 +455,16 @@
             \end{enumerate}
             \item 3-4.c Clients may redo and undo their own edits.
             \item 5.a Session ends if Host closes it, whether intentionally or unintentionally.
+        \end{itemize}
+        \item \textbf{Special Requirements}:
+        \begin{itemize}
+            \item Only exactly one User is allowed to edit a Component at a time, ensuring there won't be a racing condition.
+            \item The error message of a failed connection should be easy to read.
+        \end{itemize}
+        \item \textbf{Technology and Data Variations List}:
+        \begin{itemize}
+            \item 1-2.a System uses TCP sockets to establish and connect Sessions.
+            \item 1-4.a A well-defined protocol should be followed for communication among Users.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Sometimes
         \item \textbf{Open Issues}: Undo/redo conflicts
@@ -439,19 +491,29 @@
         \end{itemize}
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
-            \item User opens the chatroom for current Session.
+            \item User opens the chatroom for the current Session.
             \item User views chat history.
-            \item User types and sends messages.
+            \item User types then sends messages.
         \end{enumerate}
         \item \textbf{Extensions}:
         \begin{itemize}
             \item *a The time of each sent message is recorded and can be viewed by User.
-            \item 1.a If a new Session is created, System creates a new chatroom with no messages.
+            \item 1.a If a new Session is created, System creates a new chatroom with Nomessages.
             \item 2.a If System fails to load the chatroom, it will attempt to retry.
             \begin{enumerate}
                 \item If retry limit is reached, notify User of the issue encountered. User will not be able to view the previous messages.
             \end{enumerate}
             \item 3.a If System fails to send User's message, it prompts the User to either remove or resend the message.
+        \end{itemize}
+        \item \textbf{Special Requirements}:
+        \begin{itemize}
+            \item Every User in the Session sees all Messages even it was sent before they join.
+            \item The error message of a failed connection should be easy to read.
+        \end{itemize}
+        \item \textbf{Technology and Data Variations List}:
+        \begin{itemize}
+            \item 1-3.a System uses TCP sockets for Chatroom.
+            \item 1-3.b A well-defined protocol should be followed for communication among Users.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Sometimes
         \item \textbf{Open Issues}: None specified
@@ -476,17 +538,17 @@
         \end{itemize}
         \item \textbf{Main Success Scenario}:
         \begin{enumerate}
-            \item User select a Component.
-            \item User add a new Attribute into the Component.
-            \item User select an Attribute.
-            \item User change the size, font, type of the texts.
-            \item \hl{System updates according to last step.}
-            \item Steps 1--\hl{5} are repeated in any order until the editing is complete.
+            \item User selects a Component.
+            \item User adds a new Attribute into the Component.
+            \item User selects an Attribute.
+            \item User changes the size, font, type of the texts.
+            \item System updates according to last step.
+            \item Steps 1--5 are repeated in any order until the editing is complete.
         \end{enumerate}
         \item \textbf{Extensions}:
         \begin{itemize}
             \item *a If a Component or Attribute is deselected during editing, System saves its current state.
-            \item 2.a User may select \hl{an} exited Attribute instead of creating a new one.
+            \item 2.a User may select an exited Attribute instead of creating a new one.
             \item 3.a After an Attribute is selected, User may also remove it from the Component.
             \item 4.a Text type has these options:
             \begin{itemize}
@@ -494,6 +556,15 @@
                 \item Italic
                 \item Underline
             \end{itemize}
+        \end{itemize}
+        \item \textbf{Special Requirements}:
+        \begin{itemize}
+            \item The error message of a failed action should be easy to read.
+            \item A backup font should be there whenever System cannot find the User-specified font.
+        \end{itemize}
+        \item \textbf{Technology and Data Variations List}:
+        \begin{itemize}
+            \item Supported font formats are .ttf and .woff2.
         \end{itemize}
         \item \textbf{Frequency of Occurrence}: Often
         \item \textbf{Open Issues}: None specified
@@ -581,7 +652,9 @@
                 \hline
                 Project      & Connection         & *Chatroom   & *Message   & ChatHistory \\
                 \hline
-                TextStyle    &                    &             &            &             \\
+                TextStyle    & *Timer             & *Verifier   & fontSize   & isBold      \\
+                \hline
+                isItalic     & isUnderline        & position    & Toolbox    & Canvas      \\
                 \hline
             \end{tabular}
             \begin{tablenotes}
@@ -607,10 +680,10 @@
             \midrule
             fontSize & System & UMLFile & Toolbox \\
             isBold & Host & Filesystem & Canvas \\
-            isItalic & Client & VerificationResult & \\
+            isItalic & Client & VerificationResult & TextStyle \\
             isUnderline & Project & ChatHistory & \\
-            DiagramType & & Connection & TextStyle & \\
-            position    & &            &           & \\
+            DiagramType & & Connection & & \\
+            position    & &            & & \\
             \bottomrule
         \end{tabular}
         \label{tab:categories}
@@ -652,7 +725,7 @@
 
     \begin{figure}[H]
         \centering
-        \includesvg[inkscapelatex=false,height=0.75\textheight,angle=90]{assets/hw6/dmWithAssAndAtt}
+        \includesvg[inkscapelatex=false,height=0.75\textheight,angle=90]{assets/hw7/dmWithAssAndAtt}
         \caption{Domain class diagram with attributes added.}
         \label{fig:dmWithAssAndAtt}
     \end{figure}
@@ -662,282 +735,667 @@
 
 % START HW4
 
-%
-%    \section{Logical Architecture}
-%
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.9\textheight]{assets/hw4/pkg}
-%        \caption{Logical architecture}
-%    \end{figure}
-%
-%
-%    \section{System Sequence Diagrams with GRASP Patterns}
-%    We pick UC1 as our most significant use-case. Since UC1 is made of series of system events, we decide to provide SSDs for each one of them.
-%
-%    \subsection{main SSD}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.9\textheight]{assets/hw7/ssd_merge}
-%        \caption{main SSD}
-%    \end{figure}
-%
-%    \subsection{addAssociationToDiagram}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw4/addAssociationToDiagram}
-%        \caption{addAssociationToDiagram}
-%    \end{figure}
-%
-%    tt
-%
-%    \subsection{addGadgetToDiagram}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/addGadgetToDiagram}
-%        \caption{addGadgetToDiagram}
-%    \end{figure}
-%
-%    \subsection{copyComponents}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/copyComponents}
-%        \caption{copyComponents}
-%    \end{figure}
-%
-%    \subsection{deleteComponent}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/deleteComponent}
-%        \caption{deleteComponent}
-%    \end{figure}
-%
-%    \subsection{drawAll}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.65\textheight]{assets/hw4/drawAll}
-%        \caption{drawAll}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{importSubmodule}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.35\textheight]{assets/hw4/importSubmodule}
-%        \caption{importSubmodule}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{moveComponent}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw4/moveComponent}
-%        \caption{moveComponent}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{openProject}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.7\textheight]{assets/hw4/openProject}
-%        \caption{openProject}
-%    \end{figure}
-%
-%    \subsection{pasteComponents}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/pasteComponents}
-%        \caption{pasteComponents}
-%    \end{figure}
-%
-%    \subsection{redo}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/redo}
-%        \caption{redo}
-%    \end{figure}
-%
-%    \subsection{undo}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/undo}
-%        \caption{undo}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{selectComponent}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.5\textheight]{assets/hw4/selectComponent}
-%        \caption{selectComponent}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{selectDiagram}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw4/selectDiagram}
-%        \caption{selectDiagram}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{unselectAllComponents}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/unselectAllComponents}
-%        \caption{unselectAllComponents}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{unselectComponent}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw4/unselectComponent}
-%        \caption{unselectComponent}
-%    \end{figure}
-%
-%% finish scale
-%
-%    \subsection{updateProperty}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.3\textheight]{assets/hw4/updateProperty}
-%        \caption{updateProperty}
-%    \end{figure}
-%
-%
-%    \section{Design Class Model}
-%
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.65\textheight,angle=90]{assets/hw4/dcd}
-%        \caption{Design Class Diagram}
-%    \end{figure}
-%
-%% END HW4
-%
-%% START HW5
-%
-%
-%    \section{Implementation Class Model}
-%    \begin{figure}[H]
-%        \centering
-%        \includesvg[inkscapelatex=false,height=0.55\textheight,angle=90]{assets/hw5/idcd}
-%        \caption{Design Class Diagram}
-%    \end{figure}
-%    HW5 TODO
-%    \newpage
-%
-%
-%    \section{Misc}
-%
-%    \subsection{View online}
-%    Since the report contains many images, we suggest visiting the \href{https://github.com/CSIEHaTerX/Dr.UML/}{GitHub repository} to view higher-resolution versions.\\
-%    \includegraphics[]{assets/repoQRCode.png}
-%
-%
-%    \section{Calculate Line of Code}
-%
-%    \begin{longtable}{|c|c|c|c|}
-%        \hline
-%        No    & Class Name           & Number of methods & Line of Code in Class \\
-%        \hline
-%        \endfirsthead
-%        \endhead
-%        \hline
-%        1     & AssAttribute         & 10                & 98                    \\
-%        2     & Attribute            & 18                & 160                   \\
-%        3     & Association          & 17                & 185                   \\
-%        4     & Component            & 5                 & 17                    \\
-%        6     & Gadget               & 9                 & 133                   \\
-%        7     & AssociationGraph     & 8                 & 18                    \\
-%        8     & AssociationMap       & 10                & 178                   \\
-%        9     & Components           & 10                & 154                   \\
-%        10    & ComponentsContainer  & 5                 & 15                    \\
-%        11    & ContainerMap         & 6                 & 70                    \\
-%        12    & UMLDiagram           & 10                & 123                   \\
-%        13    & UMLProject           & 12                & 140                   \\
-%        14    & ConnectionError      & 2                 & 13                    \\
-%        15    & DUError              & 1                 & 6                     \\
-%        16    & FileIOError          & 3                 & 13                    \\
-%        17    & InvalidArgumentError & 3                 & 13                    \\
-%        18    & MemoryFullError      & 3                 & 13                    \\
-%        19    & FileIOError          & 3                 & 13                    \\
-%        20    & SendError            & 3                 & 13                    \\
-%        21    & Point                & 5                 & 33                    \\
-%        Total & -                    & 143               & 1408                  \\
-%        \hline
-%    \end{longtable}
-%
-%
-%    \section{Programming}
-%
-%    \subsection{Snapshots of System Execution}
-%    \begin{center}
-%        \includegraphics[width=0.95\linewidth]
-%        {assets/hw5/snapshots_of_system_execution}
-%    \end{center}
-%
-%    \subsection{Source Code Listing}
-%    \includegraphics[width=0.95\linewidth]
-%    {assets/hw5/snapshot_gadget_code}
-%
-%
-%    \includegraphics[width=0.95\linewidth]
-%    {assets/hw5/snapshot_association_code}
-%
-%
-%    \section{Unit Testing}
-%
-%    \subsection{Snapshot}
-%
-%    \begin{figure}[H]
-%        \begin{center}
-%            \includegraphics[width=0.95\linewidth]
-%            {assets/hw5/unit_test.png}
-%            \caption{Unit test snapshot}
-%        \end{center}
-%    \end{figure}
-%
-%    \subsection{Code listing}
-%
-%    \begin{figure}[H]
-%        \begin{center}
-%            \includegraphics[width=0.4\linewidth]
-%            {assets/hw5/unit_test_code.png}
-%            \caption{Unit test code}
-%        \end{center}
-%    \end{figure}
-%
 
-%    \begin{CJK*}{UTF8}{bsmi}
-%        \begin{longtable}{|c|c|c|c|}
-%            \hline
-%            Info                       & Total \\
-%            \hline
-%            \endfirsthead
-%            \endhead
-%            \hline
-%            production code            & 1648  \\
-%            class in production code   & 15    \\
-%            methods in production code & 183   \\
-%            number of unit tests       & 173   \\
-%            lines of unit tests        & 2036  \\
-%            蕭耕宏's time effort          & 48    \\
-%            張庭瑋's time effort          & 48    \\
-%            黃冠鈞's time effort          & 48    \\
-%            吳宥駒's time effort          & 48    \\
-%            total time effort          & 192   \\
-%            \hline
-%        \end{longtable}
-%    \end{CJK*}
+    \section{Logical Architecture}
+
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.9\textheight]{assets/hw4/pkg}
+        \caption{Logical architecture}
+    \end{figure}
+
+
+    \section{System Sequence Diagrams with GRASP Patterns}
+    We pick UC1 as our most significant use-case. Since UC1 is made of series of system events, we decide to provide SSDs for each one of them.
+
+    \subsection{main SSD}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.9\textheight]{assets/hw7/ssd_merge}
+        \caption{main SSD}
+    \end{figure}
+
+    \subsection{addAssociationToDiagram}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw7/addAssociationToDiagram}
+        \caption{addAssociationToDiagram}
+    \end{figure}
+
+    \subsection{addGadgetToDiagram}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/addGadgetToDiagram}
+        \caption{addGadgetToDiagram}
+    \end{figure}
+
+    \subsection{copyComponents}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/copyComponents}
+        \caption{copyComponents}
+    \end{figure}
+
+    \subsection{deleteComponent}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/deleteComponent}
+        \caption{deleteComponent}
+    \end{figure}
+
+    \subsection{drawAll}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.65\textheight]{assets/hw7/drawAll}
+        \caption{drawAll}
+    \end{figure}
+
+% finish scale
+
+    \subsection{importSubmodule}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.35\textheight]{assets/hw7/importSubmodule}
+        \caption{importSubmodule}
+    \end{figure}
+
+% finish scale
+
+    \subsection{moveComponent}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw7/moveComponent}
+        \caption{moveComponent}
+    \end{figure}
+
+% finish scale
+
+    \subsection{openProject}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.7\textheight]{assets/hw7/openProject}
+        \caption{openProject}
+    \end{figure}
+
+    \subsection{pasteComponents}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/pasteComponents}
+        \caption{pasteComponents}
+    \end{figure}
+
+    \subsection{redo}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/redo}
+        \caption{redo}
+    \end{figure}
+
+    \subsection{undo}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/undo}
+        \caption{undo}
+    \end{figure}
+
+% finish scale
+
+    \subsection{selectComponent}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.5\textheight]{assets/hw7/selectComponent}
+        \caption{selectComponent}
+    \end{figure}
+
+% finish scale
+
+    \subsection{selectDiagram}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.6\textheight]{assets/hw7/selectDiagram}
+        \caption{selectDiagram}
+    \end{figure}
+
+% finish scale
+
+    \subsection{unselectAllComponents}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/unselectAllComponents}
+        \caption{unselectAllComponents}
+    \end{figure}
+
+% finish scale
+
+    \subsection{unselectComponent}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.45\textheight]{assets/hw7/unselectComponent}
+        \caption{unselectComponent}
+    \end{figure}
+
+% finish scale
+
+    \subsection{updateProperty}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.25\textheight]{assets/hw7/updateProperty}
+        \caption{updateProperty}
+    \end{figure}
+
+
+
+    \section{Design Class Model}
+
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.65\textheight,angle=90]{assets/hw7/dcd}
+        \caption{Design Class Diagram}
+    \end{figure}
+
+% END HW4
+
+% START HW5
+
+
+    \section{Implementation Class Model}
+    \begin{figure}[H]
+        \centering
+        \includesvg[inkscapelatex=false,height=0.9\textheight]{assets/hw7/idcd}
+        \caption{Implementation Design Class Diagram}
+    \end{figure}
+
+
+
+
+
+    \begin{longtable}{|l|l|c|c|}
+        \caption{Comparison with design and implementation class}
+        \label{tab:design_vs_impl}
+        \hline
+        \textbf{Class} & \textbf{Method}                & \textbf{Design} & \textbf{Imp.} \\
+        \hline
+
+        \multirow{DUError }%done
+        & Error                          & Yes             & Yes           \\
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{AssAttribute}
+        & updateParentDrawOuter          & No              & Yes           \\
+        & updateDrawData                 & No              & Yes           \\
+        & ToSavedAssAttribute            & Yes             & Yes           \\
+        & GetRatio                       & Yes             & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & SetRatio                       & Yes             & Yes           \\
+        & RegisterUpdateParentDraw       & Yes             & Yes           \\
+        \hline
+        \multirow{Association}
+        & updateParentDraw               & No              & Yes           \\
+        & validateIndex                  & No              & Yes           \\
+        & ToSavedAssociation             & No              & Yes           \\
+        & GetAssType                     & Yes             & Yes           \\
+        & GetAttributes                  & No              & Yes           \\
+        & GetAttributesLen               & No              & Yes           \\
+        & GetAttribute                   & No              & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & GetLayer                       & Yes             & Yes           \\
+        & GetParentEnd                   & Yes             & Yes           \\
+        & GetParentStart                 & Yes             & Yes           \\
+        & GetStartRatio                  & No              & Yes           \\
+        & GetEndRatio                    & No              & Yes           \\
+        & GetIsSelected                  & No              & Yes           \\
+        & SetIsSelected                  & No              & Yes           \\
+        & SetAssType                     & Yes             & Yes           \\
+        & SetLayer                       & Yes             & Yes           \\
+        & SetParentStart                 & Yes             & Yes           \\
+        & SetParentEnd                   & Yes             & Yes           \\
+        & SetAttrContent                 & No              & Yes           \\
+        & SetAttrSize                    & No              & Yes           \\
+        & SetAttrStyle                   & No              & Yes           \\
+        & SetAttrFontFile                & No              & Yes           \\
+        & SetAttrRatio                   & No              & Yes           \\
+        & Cover                          & No              & Yes           \\
+        & AddAttribute                   & Yes             & Yes           \\
+        & AddLoadedAttribute             & No              & Yes           \\
+        & MoveAttribute                  & Yes             & Yes           \\
+        & RemoveAttribute                & Yes             & Yes           \\
+        & UpdateDrawData                 & No              & Yes           \\
+        & RegisterUpdateParentDraw       & No              & Yes           \\
+        \hline
+        \multirow{Attribute}% % done
+        & updateParentDraw               & No              & Yes           \\
+        & getFontFileBase                & No              & Yes           \\
+        & updateDrawData                 & No              & Yes           \\
+        & GetContent                     & Yes             & Yes           \\
+        & SetContent                     & Yes             & Yes           \\
+        & GetSize                        & Yes             & Yes           \\
+        & SetSize                        & Yes             & Yes           \\
+        & GetStyle                       & Yes             & Yes           \\
+        & SetStyle                       & Yes             & Yes           \\
+        & SetBold                        & Yes             & Yes           \\
+        & SetItalic                      & Yes             & Yes           \\
+        & SetUnderline                   & Yes             & Yes           \\
+        & SetFontFile                    & No              & Yes           \\
+        & GetFontFile                    & No              & Yes           \\
+        & IsBold                         & Yes             & Yes           \\
+        & IsItalic                       & Yes             & Yes           \\
+        & IsUnderline                    & Yes             & Yes           \\
+        & RegisterUpdateParentDraw       & No              & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & Copy                           & No              & Yes           \\
+        \hline
+        \multirow{Commands (not in dcd)}%done
+        & Execute                        & Yes             & No            \\
+        & Unexecute                      & No              & Yes           \\
+        & GetBefore                      & No              & Yes           \\
+        & GetAfter                       & No              & Yes           \\
+        \hline
+        \multirow{Component }%done
+        & SetupProperty                  & Yes             & No            \\
+        & CreatePropertyTree             & Yes             & No            \\
+        & Copy                           & Yes             & No            \\
+        & Draw                           & Yes             & No            \\
+        & GetLayer                       & Yes             & Yes           \\
+        & GetPoint                       & Yes             & No            \\
+        & updateParentDraw               & Yes             & No            \\
+        & validateSection                & Yes             & No            \\
+        & validateIndex                  & Yes             & No            \\
+        & updateDrawData                 & Yes             & No            \\
+        & ToSavedGadget                  & Yes             & No            \\
+        & GetColor                       & Yes             & No            \\
+        & GetGadgetType                  & Yes             & No            \\
+        & GetAttributesLen               & Yes             & No            \\
+        & GetIsSelected                  & Yes             & No            \\
+        & GetAttributes                  & Yes             & No            \\
+        & GetAttribute                   & Yes             & No            \\
+        & SetIsSelected                  & Yes             & Yes           \\
+        & SetPoint                       & Yes             & Yes           \\
+        & SetLayer                       & Yes             & No            \\
+        & SetColor                       & Yes             & No            \\
+        & SetAttrContent                 & Yes             & No            \\
+        & SetAttrSize                    & Yes             & No            \\
+        & SetAttrStyle                   & Yes             & Yes           \\
+        & SetAttrFontFile                & Yes             & No            \\
+        & Cover                          & Yes             & Yes           \\
+        & AddAttribute                   & Yes             & No            \\
+        & AddBuiltAttribute              & Yes             & No            \\
+        & RemoveAttribute                & Yes             & No            \\
+        & GetDrawData                    & Yes             & Yes           \\
+        & RegisterUpdateParentDraw       & Yes             & Yes           \\
+        \hline
+        \multirow{ConnectionError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{Container }%done
+        & Insert                         & No              & Yes           \\
+        & Remove                         & No              & Yes           \\
+        & Search                         & No              & Yes           \\
+        & SearchGadget                   & No              & Yes           \\
+        & Contain                        & No s            & Yes           \\
+        & GetAll                         & No              & Yes           \\
+        & Len                            & No              & Yes           \\
+        \hline
+        \multirow{ContainerMap (not in dcd) }%done
+        & Insert                         & Yes             & Yes           \\
+        & Insert                         & No              & Yes           \\
+        & Insert                         & No              & Yes           \\
+        & Remove                         & No              & Yes           \\
+        & Search                         & No              & Yes           \\
+        & SearchGadget                   & No              & Yes           \\
+        & Contain                        & No              & Yes           \\
+        & GetAll                         & No              & Yes           \\
+        & Len                            & Yes             & Yes           \\
+        \hline
+        \multirow{CorruptedFileError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{FileIOError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{Gadget }%done
+        & updateParentDraw               & No              & Yes           \\
+        & validateSection                & No              & Yes           \\
+        & validateIndex                  & No              & Yes           \\
+        & updateDrawData                 & No              & Yes           \\
+        & ToSavedGadget                  & No              & Yes           \\
+        & GetPoint                       & Yes             & Yes           \\
+        & GetLayer                       & Yes             & Yes           \\
+        & GetColor                       & No              & Yes           \\
+        & GetGadgetType                  & No              & Yes           \\
+        & GetAttributesLen               & No              & Yes           \\
+        & GetIsSelected                  & No              & Yes           \\
+        & GetAttributes                  & No              & Yes           \\
+        & GetAttribute                   & No              & Yes           \\
+        & SetIsSelected                  & No              & Yes           \\
+        & SetPoint                       & Yes             & Yes           \\
+        & SetLayer                       & Yes             & Yes           \\
+        & SetColor                       & No              & Yes           \\
+        & SetAttrContent                 & No              & Yes           \\
+        & SetAttrSize                    & No              & Yes           \\
+        & SetAttrStyle                   & No              & Yes           \\
+        & SetAttrFontFile                & No              & Yes           \\
+        & Cover                          & No              & Yes           \\
+        & AddAttribute                   & Yes             & Yes           \\
+        & AddBuiltAttribute              & Yes             & Yes           \\
+        & RemoveAttribute                & No              & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & RegisterUpdateParentDraw       & No              & Yes           \\
+        & SetPoint                       & Yes             & No            \\
+        & MoveDelta                      & Yes             & No            \\
+        & ArrangeAttribute               & Yes             & No            \\
+        & Draw                           & Yes             & No            \\
+        \hline
+        \multirow{InvalidArgumentError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{Manager (not in dcd) }%done
+        & GetLastModified                & No              & Yes           \\
+        & Execute                        & No              & Yes           \\
+        & Undo                           & No              & Yes           \\
+        & Redo                           & No              & Yes           \\
+        \hline
+        \multirow{MemoryFullError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{ParseError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{Point (not in dcd) }%done
+        & String                         & No              & Yes           \\
+        & Magnitude                      & No              & Yes           \\
+        & MagnitudeInt                   & No              & Yes           \\
+
+        \hline
+        \multirow{SendError }%done
+        & Error                          & Yes             & Yes           \\
+        \hline
+        \multirow{Umldiagram }%done
+        & getSelectedComponent           & No              & Yes           \\
+        & validatePoint                  & No              & Yes           \\
+        & loadGadgetAttributes           & No              & Yes           \\
+        & loadGadgets                    & No              & Yes           \\
+        & loadAssAttributes              & No              & Yes           \\
+        & loadAsses                      & No              & Yes           \\
+        & collectGadgets                 & No              & Yes           \\
+        & collectAssociations            & No              & Yes           \\
+        & updateDrawData                 & No              & Yes           \\
+        & addComponent                   & No              & Yes           \\
+        & addGadget                      & No              & Yes           \\
+        & addAssociation                 & No              & Yes           \\
+        & removeComponent                & No              & Yes           \\
+        & removeGadget                   & No              & Yes           \\
+        & removeAssociation              & No              & Yes           \\
+        & getAllAssociationsInGadget     & No              & Yes           \\
+        & removeComponents               & No              & Yes           \\
+        & addComponents                  & No              & Yes           \\
+        & selectAll                      & No              & Yes           \\
+        & moveGadget                     & No              & Yes           \\
+        & setParentStartAssociation      & No              & Yes           \\
+        & setParentEndAssociation        & No              & Yes           \\
+        & addAttributeGadget             & No              & Yes           \\
+        & removeAttributeGadget          & No              & Yes           \\
+        & addAttributeAssociation        & No              & Yes           \\
+        & removeAttributeAssociation     & No              & Yes           \\
+        & GetName                        & No              & Yes           \\
+        & GetDiagramType                 & No              & Yes           \\
+        & GetLastModified                & No              & Yes           \\
+        & SetPointComponent              & No              & Yes           \\
+        & SetLayerComponent              & No              & Yes           \\
+        & SetColorComponent              & No              & Yes           \\
+        & SetAttrContentComponent        & No              & Yes           \\
+        & SetAttrSizeComponent           & No              & Yes           \\
+        & SetAttrStyleComponent          & No              & Yes           \\
+        & SetAttrFontComponent           & No              & Yes           \\
+        & SetAttrRatioComponent          & No              & Yes           \\
+        & SetParentStartComponent        & No              & Yes           \\
+        & SetParentEndComponent          & No              & Yes           \\
+        & Undo                           & Yes             & Yes           \\
+        & Redo                           & Yes             & Yes           \\
+        & AddGadget                      & Yes             & Yes           \\
+        & StartAddAssociation            & Yes             & Yes           \\
+        & EndAddAssociation              & Yes             & Yes           \\
+        & RemoveSelectedComponents       & Yes             & Yes           \\
+        & SelectComponent                & Yes             & Yes           \\
+        & AddAttributeToGadget           & No              & Yes           \\
+        & RemoveAttributeFromGadget      & No              & Yes           \\
+        & AddAttributeToAssociation      & No              & Yes           \\
+        & RemoveAttributeFromAssociation & No              & Yes           \\
+        & SaveToFile                     & No              & Yes           \\
+        & HasUnsavedChanges              & No              & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & RegisterUpdateParentDraw       & No              & Yes           \\
+        & UnselectComponent              & No              & No            \\
+        & UnselectAllComponents          & No              & No            \\
+        & ExportSubmodule                & No              & No            \\
+        & ImportSubmodule                & No              & No            \\
+        & StartDragging                  & No              & No            \\
+        & StopDragging                   & No              & No            \\
+        & createAssociation              & No              & No            \\
+        & findGadget                     & No              & No            \\
+        & adjustAssociationPath          & No              & No            \\
+        & setupProperty                  & No              & No            \\
+        \hline
+        \multirow{Umlproject }%done
+        & GetName                        & No              & Yes           \\
+        & GetLastModified                & No              & Yes           \\
+        & GetCurrentDiagramName          & No              & Yes           \\
+        & GetAvailableDiagramsNames      & Yes             & Yes           \\
+        & GetActiveDiagramsNames         & No              & Yes           \\
+        & SetPointComponent              & No              & Yes           \\
+        & SetLayerComponent              & No              & Yes           \\
+        & SetColorComponent              & No              & Yes           \\
+        & SetAttrContentComponent        & No              & Yes           \\
+        & SetAttrSizeComponent           & No              & Yes           \\
+        & SetAttrStyleComponent          & No              & Yes           \\
+        & SetAttrFontComponent           & No              & Yes           \\
+        & SetAttrRatioComponent          & No              & Yes           \\
+        & SetParentStartComponent        & No              & Yes           \\
+        & SetParentEndComponent          & No              & Yes           \\
+        & Startup                        & No              & Yes           \\
+        & SelectDiagram                  & Yes             & Yes           \\
+        & CreateEmptyUMLDiagram          & Yes             & Yes           \\
+        & CloseDiagram                   & No              & Yes           \\
+        & DeleteDiagram                  & No              & Yes           \\
+        & UndoDiagramChange              & Yes             & Yes           \\
+        & RedoDiagramChange              & Yes             & Yes           \\
+        & AddGadget                      & Yes             & Yes           \\
+        & StartAddAssociation            & Yes             & Yes           \\
+        & EndAddAssociation              & Yes             & Yes           \\
+        & RemoveSelectedComponents       & Yes             & Yes           \\
+        & AddAttributeToGadget           & No              & Yes           \\
+        & RemoveAttributeFromGadget      & No              & Yes           \\
+        & AddAttributeToAssociation      & No              & Yes           \\
+        & RemoveAttributeFromAssociation & No              & Yes           \\
+        & SelectComponent                & Yes             & Yes           \\
+        & GetDrawData                    & No              & Yes           \\
+        & InvalidateCanvas               & No              & Yes           \\
+        & OpenDiagram                    & No              & Yes           \\
+        & SaveDiagram                    & No              & Yes           \\
+        & LoadProject                    & No              & Yes           \\
+        & SaveProject                    & No              & Yes           \\
+        & CloseProject                   & No              & Yes           \\
+        & GetLastOpenedDiagrams          & Yes             & No            \\
+        & UnselectComponent              & Yes             & No            \\
+        & CopyComponents                 & Yes             & No            \\
+        & PasteComponents                & Yes             & No            \\
+        & ImportSubmodule                & Yes             & No            \\
+        & StartDragging                  & Yes             & No            \\
+        & StopDragging                   & Yes             & No            \\
+        & DrawAll                        & Yes             & No            \\
+        \hline
+
+%        \end{tabular}
+    \end{longtable}
+
+
+
+
+    \begin{table}[h!]
+        \centering
+        \caption{Summary of implementation class/method changed}
+        \label{tab:modifyToClass}
+        \begin{tabular}{c c c c}
+            \hline
+            & \textbf{Number of Added} & \textbf{Number of Removed} & \textbf{Number of Modified} \\
+            \hline
+            Class   & 10                       & 13                         & 10                          \\
+            \hline
+            Methods & 119                      & 37                         & 47                          \\
+        \end{tabular}
+    \end{table}
+
+    \begin{longtable}{|c|c|c|c|}
+        \caption{Line of Code of classes}
+        \hline
+        No & Class Name           & Number of methods & Line of Code in Class \\
+        \hline
+        \endfirsthead
+        \endhead
+        \hline
+        1  & DUErrorError         & 1                 & 5                     \\ %utils\duerror\DUError.go
+        2  & assAttribute         & 6                 & 108                   \\ %component\attribute\assAttribute.go
+        3  & association          & 32                & 557                   \\ %component\association.go
+        4  & attribute            & 19                & 215                   \\ %component\attribute\attribute.go
+        5  & commands             & 24                & 247                   \\ %umldiagram\commands.go
+        6  & component            & 7                 & 19                    \\ %component\component.go
+        7  & connectionError      & 1                 & 13                    \\ %utils\duerror\connection.go
+        8  & container            & 7                 & 17                    \\ %components\container.go
+        9  & containerMap         & 7                 & 92                    \\ %components\containerMap.go
+        10 & corruptedFileError   & 1                 & 13                    \\ %utils\duerror\corruptedFile.go
+        11 & fileIOError          & 1                 & 13                    \\ %utils\duerror\fileIO.go
+        12 & gadget               & 29                & 424                   \\ %component\gadget.go
+        13 & invalidArgumentError & 1                 & 13                    \\ %utils\duerror\invalidArgument.go
+        14 & manager              & 4                 & 80                    \\ %command\manager.go
+        15 & memoryFullError      & 1                 & 13                    \\ %utils\duerror\memoryFull.go
+        16 & parseError           & 1                 & 13                    \\ %utils\duerror\parse.go
+        17 & point                & 3                 & 48                    \\ %utils\point.go
+        18 & sendError            & 1                 & 13                    \\ %utils\duerror\send.go
+        19 & umldiagram           & 55                & 1256                  \\ %umldiagram\umldiagram.go
+        20 & umlproject           & 42                & 657                   \\ %umlproject\umlproject.go
+        21 & total                & 242               & 3816                  \\
+        \hline
+    \end{longtable}
+
+
+    \section{Programming}
+
+    \subsection{Snapshots of System Execution}
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/exe1.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/exe2.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/syscode1.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/syscode2.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/syscode3.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/syscode4.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=0.95\linewidth]
+        {assets/hw7/syscode5.png}
+    \end{center}
+
+    \subsection{Source Code Listing}
+    \includegraphics[width=0.95\linewidth]
+    {assets/hw5/snapshot_gadget_code}
+
+
+    \includegraphics[width=0.95\linewidth]
+    {assets/hw5/snapshot_association_code}
+
+
+    \section{Unit Testing}
+
+    \subsection{Snapshot}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/cover1.png}
+            \caption{Unit test snapshot}
+        \end{center}
+    \end{figure}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/cover2.png}
+            \caption{Unit test snapshot}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/cover3.png}
+            \caption{Unit test snapshot}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/cover4.png}
+            \caption{Unit test snapshot}
+        \end{center}
+    \end{figure}
+
+    \subsection{Code listing}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/test1.png}
+            \caption{Code listing snapshot}
+        \end{center}
+    \end{figure}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/test2.png}
+            \caption{Code listing snapshot}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/test3.png}
+            \caption{Code listing snapshot}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/test4.png}
+            \caption{Code listing snapshot}
+        \end{center}
+    \end{figure}
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\linewidth]
+            {assets/hw7/test5.png}
+            \caption{Code listing snapshot}
+        \end{center}
+    \end{figure}
 
 
 % % END HW5
@@ -961,13 +1419,9 @@
             \hline
             \endhead
             \hline
-            25/05/15 16:00 - 19:00 & 25/05/15 16:00 - 19:00 & 25/05/15 16:00 - 19:00 & 25/05/15 16:00 - 19:00 \\
+            25/06/11 21:00 - 23:59 & 25/06/11 21:00 - 23:59 & 25/06/11 21:00 - 23:59 & 25/06/11 21:00 - 23:59 \\
             \hline
-            & 25/05/16 17:30 - 19:15 & 25/05/16 05:00 - 08:00 &                        \\
-            \hline
-            & 25/05/16 16:00 - 24:00 &                        &                        \\
-            \hline
-            3 hr                   & 13 hr                  & 6 hr                   & 3 hr                   \\
+            3 hr                   & 3 hr                   & 3 hr                   & 3 hr                   \\
             \hline
         \end{longtable}
     \end{CJK*}
@@ -981,3 +1435,12 @@
     \printbibliography[heading=none]
 
 \end{document}
+
+%
+% DUError done
+% AssAttributed don
+%
+%
+%
+%
+%e
